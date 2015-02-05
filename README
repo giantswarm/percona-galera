@@ -1,0 +1,7 @@
+```
+sudo aa-complain /etc/apparmor.d/docker
+```
+
+Disable gvwstate.dat
+
+Look into libaio
