@@ -14,6 +14,18 @@ OPT="$@"
 
 which $MYSQLD || exit 1
 
+# Check for mysql.* schema
+# If it does not exists we got to create it
+
+test -d /var/lib/mysql/mysql
+if [ $? != 0 ]; then
+  mysql_install_db --user=mysql
+  if [ $? != 0 ]; then
+    echo "${LOG_MESSAGE} Tried to install mysql.* schema because /var/lib/mysql seemed empty"
+    echo "${LOG_MESSAGE} it failed :("
+  fi
+fi
+
 # Get the GTID possition
 
 echo  "${LOG_MESSAGE} Get the GTID positon"
